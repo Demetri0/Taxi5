@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head lang="ru">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Такси 5</title>
+    
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <script src="./js/jquery-2.1.4.min.js"></script>
+
+    <style>
+        .container{
+            max-width: 950px;
+        }
+        .city{
+            margin-bottom: 20px;
+        }
+
+        .require-field:after{
+            color: red;
+            content: '*';
+        }
+        
+        @media (max-width: 1000px){
+            #phones {
+                display: none;
+            }
+        }
+
+    </style>
+
+    <script>
+        var data = [];
+
+        function fieldValidate(field, formGroup){
+            var fGroup = $(formGroup);
+
+            fGroup.removeClass('has-error has-success');
+
+            if( field.val() == '' ){
+                fGroup.addClass('has-error');
+                return false;
+            } else {
+                fGroup.addClass('has-success');
+                return true;
+            }
+        }
+
+        function formValidate(){
+            var success = 0;
+            var fieldCount = 0;
+            
+            success += fieldValidate( data['client-phone']  , '#client-phone' ), fieldCount++;
+            success += fieldValidate( data['client-name']   , '#client-name'  ), fieldCount++;
+            success += fieldValidate( data['from-street']   , '#from-street'  ), fieldCount++;
+            success += fieldValidate( data['from-home']     , '#from-home'    ), fieldCount++;
+            success += fieldValidate( data['to-street']     , '#to-street'    ), fieldCount++;
+            success += fieldValidate( data['to-home']       , '#to-home'      ), fieldCount++;
+
+            return success == fieldCount;
+        }
+
+        $( document ).ready(function() {
+            data['client-phone']  = $('#client-phone-input');
+            data['client-name']   = $('#client-name-input');
+            data['from-street']   = $('#from-street-input');
+            data['from-home']     = $('#from-home-input');
+            data['to-street']     = $('#to-street-input');
+            data['to-home']       = $('#to-home-input');
+            
+            $('#btn-submit').click( function(){
+                return formValidate();
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <section class="page-header">
+            
+            <div class="row">
+                <h1 class="col-md-8">
+                Такси 5
+                <div>
+                    <small>Лучшая служба такси в казахстане!</small>
+                </div>
+            </h1>
+
+            <div id="phones" class="col-md-4 text-right">
+                <h4>Наши телефоны:</h4>
+                <ul class="list-unstyled">
+                    <li>500-500</li>
+                    <li>8-701-7-500-500</li>
+                    <li>8-707-7-500-500</li>
+                    <li><small>С Beeline бесплатно</small> 8-777-7-500-500</li>
+                </ul>
+            </div>
+
+            </div>
+
+            <ul class="nav nav-pills">
+                <li role="presentation" class="active"><a href="#">Заказ такси онлайн</a></li>
+                <li role="presentation"><a href="#">Наши услуги</a></li>
+                <li role="presentation"><a href="#">О нас</a></li>
+            </ul>
+        </section>
+        <div class="panel panel-default">
+            <div class="panel-body">
+            <section class="city">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        Выберите город:
+                    </div>
+                    <select class="form-control input-sm">
+                        <option value="pertop-taxikz">Петропавловск (Taxi Kz)</option>
+                        <option value="pertop-taxi5">Петропавловск (Такси 5)</option>
+                        <option value="kokshetau-taxi2">Кокшетау (Такси 2)</option>
+                        <option value="mamlut-taxi1">Мамлютка (Такси 1)</option>
+                        <option value="shuchinsk-taxikz">Щучинск (Taxi Kz)</option>
+                        <option value="astana-taxikz">Астана (Taxi Kz)</option>
+                    </select>
+                </div>
+            </section>
+            <fieldset>
+                <legend>Контактные данные:</legend>
+                <div class="row">
+                    <div id="client-phone" class="form-group col-md-8 has-feedback">
+                        <label class="require-field">Телефон</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+                            </div>
+                            <input id="client-phone-input" required type="tel" class="form-control" placeholder="Телефон">
+                        </div> <!-- /input-group -->
+                    </div> <!-- /input-group -->
+
+                    <div id="client-name" class="form-group col-md-4">
+                        <label class="require-field">Ваше имя</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                            </div>
+                            <input id="client-name-input" required type="text" class="form-control" placeholder="Ваше имя">
+                        </div> <!-- /input-group -->
+                    </div> <!-- /input-group -->
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Откуда:</legend>
+                <div class="row">
+                    <div id="from-street" class="form-group has-feedback col-md-7">
+                        <label class="require-field">Улица</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
+                            </div>
+                            <input id="from-street-input" required type="tel" class="form-control" placeholder="Улица">
+                        </div> <!-- /input-group -->
+                    </div> <!-- /form-group -->
+
+                    <div id="from-home" class="form-group has-feedback col-md-3">
+                        <label class="require-field">Дом</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                            </div>
+                            <input id="from-home-input" required type="tel" class="form-control" placeholder="Дом">
+                        </div> <!-- /input-group -->
+                    </div> <!-- /form-group -->
+
+                    <div class="form-group col-md-2">
+                        <label>Подъезд</label>
+                        <input id="from-entrance-input" type="text" class="form-control" placeholder="Подъезд">
+                    </div> <!-- /form-group -->
+
+                    <div class="form-group col-md-12">
+                        <label>Комментарий</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Комментарий">
+                        </div> <!-- /input-group -->
+                    </div> <!-- /form-group -->
+                </div> <!-- /row -->
+            </fieldset>
+            <fieldset>
+                <legend>Куда:</legend>
+                <div class="row">
+                    <div id="to-street" class="form-group has-feedback col-md-7">
+                        <label class="require-field">Улица</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
+                            </div>
+                            <input id="to-street-input" required type="tel" class="form-control" placeholder="Улица">
+                        </div> <!-- /input-group -->
+                    </div> <!-- /form-group -->
+                    
+                    <div id="to-home" class="form-group has-feedback col-md-5">
+                        <label class="require-field">Дом</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                            </div>
+                            <input id="to-home-input" required type="text" class="form-control" placeholder="Дом">
+                        </div> <!-- /input-group -->
+                    </div> <!-- /form-group -->
+                </div> <!-- /row -->
+            </fieldset>
+            <div style="margin-top:50px"></div>
+            <section>
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="input-group">
+                            <div class="input-group-addon">Стоимость</div>
+                            <input type="text" class="form-control text-right" readonly value="500">
+                            <div class="input-group-addon">тг</div>
+                        </div> <!-- /input-group -->
+                    </div>
+                    <div class="col-md-5">
+                        <button id="btn-submit" type="submit" class="btn btn-primary btn-block">Заказать</button>
+                    </div>
+                </div>
+            </section>
+        </div> <!-- /panel-body -->
+    </div> <!-- /panel -->
+</body>
+</html>
